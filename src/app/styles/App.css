@@ -1,0 +1,27 @@
+#bd {
+  margin: 0;
+  padding: 0;
+}
+
+.underline {
+  position: relative;
+  display: inline-block;
+}
+
+.underline:before {
+  content: "";
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.4s;
+  transform-origin: bottom right;
+  width: 100%;
+  height: 2px;
+}
+
+.underline:hover:before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
