@@ -1,0 +1,114 @@
+.swiper-slide {
+  position: relative;
+  overflow: hidden; /* Ensure the gradient doesn't spill out */
+}
+
+.swiper-slide::before,
+.swiper-slide::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 30%; /* Adjust the height to control the gradient intensity */
+  z-index: 2; /* Place above the image */
+}
+
+.swiper-slide::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.swiper-slide::after {
+  bottom: 0;
+  background: linear-gradient(
+    0deg,
+    rgb(0 0 0) 0%,
+    rgb(0 0 0 / 85%) 25%,
+    rgb(0 0 0 / 67%) 50%,
+    rgb(0 0 0 / 0%) 100%
+  );
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image fills the container */
+}
+
+.mySwiper {
+  width: 100%;
+  height: 100vh;
+}
+
+.slide-text-cont {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  bottom: 3rem;
+  color: white;
+  font-size: 24px;
+  padding: 0 3rem;
+  z-index: 3;
+  box-sizing: border-box;
+}
+.slide-text {
+  max-width: 750px;
+  width: 100%;
+  p {
+    font-size: 4rem;
+    margin: 0;
+    line-height: 1;
+  }
+}
+.slide-navigation-cont {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  p {
+    margin: 0;
+  }
+}
+.slide-navigation {
+  display: flex;
+  gap: 2rem;
+  > div {
+    position: relative;
+    color: white;
+    inset: inherit;
+  }
+}
+.slide-navigation-cont {
+  max-width: 600px;
+  p {
+    font-size: 1.2rem;
+  }
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 2rem;
+  display: none;
+}
+
+.slide-text span {
+  background-color: #ffe768;
+  color: black;
+}
+
+
+
+
+.swiper-slide-active .front-images-cont {
+  animation: zoomIn 20s infinite;
+}
+
+/* Zoom-in keyframe animation */
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
