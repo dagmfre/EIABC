@@ -1,6 +1,10 @@
 #bd {
   margin: 0;
   padding: 0;
+  font-family: "Noto Sans Ethiopic", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
 .underline {
@@ -10,7 +14,7 @@
 
 .underline:before {
   content: "";
-  background-color: white;
+  background-color: #fefe4e;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -23,5 +27,10 @@
 
 .underline:hover:before {
   transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.underline.active:before {
+  transform: scaleX(1); /* Ensure underline is always active for the current link */
   transform-origin: bottom left;
 }

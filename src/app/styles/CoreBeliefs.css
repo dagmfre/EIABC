@@ -1,0 +1,44 @@
+.core-beliefs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 5rem;
+  max-width: 1480px;
+  margin: auto;
+  padding: 8rem 0;
+  box-sizing: border-box;
+  img {
+    max-width: 700px;
+  }
+}
+
+.core-beliefs-text p {
+  margin: 0;
+  background-color: #fefe4e;
+  max-width: max-content;
+}
+
+.core-beliefs-text h1 {
+  margin: 4px 0 15px;
+}
+
+.beliefs-cont svg {
+  svg {
+    width: 1.3em;
+    height: 1.3em;
+  }
+}
+
+.beliefs-cont i {
+  font-size: 1.8rem;
+  width: 1.1em;
+  height: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.beliefs > :nth-child(1) {
+  font-weight: 600;
+}
