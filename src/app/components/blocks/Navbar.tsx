@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useLocation, Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,12 +12,19 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const pages = ["ቀዳሚ ገጽ", "ስለ ግቢ-ጉባኤው", "መልእክታት", "ዜናዎች", "አድራሻ"];
+const pages = [
+  { name: "ቀዳሚ ገጽ", path: "/" },
+  { name: "ስለ ግቢ-ጉባኤው", path: "/about" },
+  { name: "መልእክታት", path: "/messages" },
+  { name: "ዜናዎች", path: "/news" },
+  { name: "አድራሻ", path: "/contact" },
+];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<HTMLElement | null>(
     null
   );
+  const location = useLocation(); // Get the current route
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -27,13 +35,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar
-      sx={{
-        background: "none",
-        boxShadow: "none",
-      }}
-      position="absolute"
-    >
+    <AppBar sx={{ background: "none", boxShadow: "none" }} position="absolute">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon
@@ -46,8 +48,8 @@ function Navbar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -62,6 +64,7 @@ function Navbar() {
             LOGO
           </Typography>
 
+          {/* Mobile View */}
           <Box
             sx={{
               flexGrow: 1,
@@ -71,7 +74,7 @@ function Navbar() {
           >
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="menu"
               aria-controls="menu-app-bar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -82,64 +85,46 @@ function Navbar() {
             <Menu
               id="menu-app-bar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
+              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
               keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
+              transformOrigin={{ vertical: "top", horizontal: "left" }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
-                <MenuItem
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ gap: "1rem" }}
-                >
-                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography
+                    component={Link}
+                    to={page.path}
+                    sx={{
+                      textDecoration:
+                        location.pathname === page.path ? "underline" : "none",
+                      fontWeight: 500,
+                      color: "inherit",
+                    }}
+                  >
+                    {page.name}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+
+          {/* Desktop View */}
           <Box
             sx={{
               flexGrow: 1,
-              display: {
-                xs: "none",
-                md: "flex",
-                justifyContent: "center",
-                gap: "1rem",
-              },
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+              gap: "1rem",
             }}
           >
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={page.name}
+                component={Link}
+                to={page.path}
                 disableRipple
                 sx={{
                   my: 2,
@@ -149,34 +134,21 @@ function Navbar() {
                 }}
               >
                 <Typography
-                  className="underline"
+                  className={
+                    location.pathname === page.path
+                      ? "underline active"
+                      : "underline"
+                  }
                   sx={{
                     fontWeight: 500,
                     textDecoration: "none",
                     fontSize: "1.3rem",
                   }}
                 >
-                  {page}
+                  {page.name}
                 </Typography>
               </Button>
             ))}
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Button
-              disableRipple
-              sx={{ my: 2, color: "white", fontSize: "1.3rem" }}
-            >
-              <Typography
-                className="underline"
-                sx={{
-                  fontWeight: 500,
-                  textDecoration: "none",
-                  fontSize: "1.3rem",
-                }}
-              >
-                ወደ አድራሻ
-              </Typography>
-            </Button>
           </Box>
         </Toolbar>
       </Container>
