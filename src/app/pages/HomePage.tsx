@@ -1,9 +1,13 @@
-import FrontPage from "../components/Home/FrontPage";
+import CoreBeliefs from "../components/Home/CoreBeliefs";
+import FrontSection from "../components/Home/FrontSection";
+import Structures from "../components/Home/Structures";
 
 const HomePage: React.FC = () => {
   return (
     <>
-      <FrontPage />
+      <FrontSection />
+      <CoreBeliefs />
+      <Structures />
     </>
   );
 };
